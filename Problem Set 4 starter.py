@@ -1,12 +1,4 @@
 # Problem 1
-reports = [
-    "SANTOS | Private | Fitness:91 | Status:available",
-    "KOWALSKI | Corporal | Fitness:74 | Status:deployed",
-    "OKAFOR | Sergeant | Fitness:88 | Status:available",
-    "BRIGGS | Private | Fitness:55 | Status:available",
-    "NAKAMURA | Corporal | Fitness:82 | Status:deployed",
-    "REYES | Sergeant | Fitness:79 | Status:available",
-]
 class Soldier:
     """Represents a soldier with rank, fitness, and deployment status."""
 

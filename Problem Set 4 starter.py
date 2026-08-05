@@ -133,21 +133,20 @@ class Pantry:
         self.items = set(items)
 
     def add_ingredients(self, extra_ingredients: list[str]) -> None:
-        """Add new ingredients to the pantry."""
+        
         for ingredient in extra_ingredients:
             self.items.add(ingredient)
 
     def has(self, ingredient: str) -> bool:
-        """Check if the pantry contains an ingredient."""
+      
         return ingredient in self.items
 
     def get_items(self) -> set[str]:
-        """Return the set of all items in the pantry."""
+        
         return self.items
 
 
 def create_recipes(recipe_data: dict[str, list[str]]) -> list[Recipe]:
-    """Convert recipe dictionary to list of Recipe objects."""
     recipes = []
     for name, ingredients in recipe_data.items():
         recipes.append(Recipe(name, ingredients))
@@ -155,7 +154,6 @@ def create_recipes(recipe_data: dict[str, list[str]]) -> list[Recipe]:
 
 
 def check_recipes(recipes: list[Recipe], pantry: Pantry) -> None:
-    """Check which recipes can be made and print results."""
     print("=== RECIPE CHECKER ===")
 
     all_ingredients = set()
@@ -175,3 +173,4 @@ def check_recipes(recipes: list[Recipe], pantry: Pantry) -> None:
     unique.sort()
     print(f"\nAll unique ingredients ({len(unique)}): {unique}")
 
+# Problem 3

@@ -92,3 +92,86 @@ def fitness_report(roster: dict[str, Soldier]) -> dict[str, list[str]]:
             
     return bands
     pass
+# Problem 2
+recipe_data = {
+    "omelette":        ["eggs", "butter", "salt", "pepper", "cheese"],
+    "pancakes":        ["flour", "eggs", "milk", "butter", "sugar", "salt"],
+    "tomato pasta":    ["pasta", "tomatoes", "garlic", "olive oil", "salt", "pepper"],
+    "grilled cheese":  ["bread", "cheese", "butter"],
+}
+
+pantry_items = ["eggs", "butter", "salt", "pepper", "cheese", "milk", "bread", "garlic"]
+
+class Recipe:
+    
+
+    def __init__(self, name: str, ingredients: list[str]):
+        self.name = name
+        self.ingredients = ingredients
+
+    def can_make(self, pantry_set: set[str]) -> bool:
+       
+        for ingredient in self.ingredients:
+            if ingredient not in pantry_set:
+                return False
+        return True
+
+    def missing_ingredients(self, pantry_set: set[str]) -> list[str]:
+        
+        missing = []
+        for ingredient in self.ingredients:
+            if ingredient not in pantry_set:
+                missing.append(ingredient)
+        missing.sort()
+        return missing
+
+
+class Pantry:
+    
+
+    def __init__(self, items: list[str]):
+        self.items = set(items)
+
+    def add_ingredients(self, extra_ingredients: list[str]) -> None:
+        """Add new ingredients to the pantry."""
+        for ingredient in extra_ingredients:
+            self.items.add(ingredient)
+
+    def has(self, ingredient: str) -> bool:
+        """Check if the pantry contains an ingredient."""
+        return ingredient in self.items
+
+    def get_items(self) -> set[str]:
+        """Return the set of all items in the pantry."""
+        return self.items
+
+
+def create_recipes(recipe_data: dict[str, list[str]]) -> list[Recipe]:
+    """Convert recipe dictionary to list of Recipe objects."""
+    recipes = []
+    for name, ingredients in recipe_data.items():
+        recipes.append(Recipe(name, ingredients))
+    return recipes
+
+
+def check_recipes(recipes: list[Recipe], pantry: Pantry) -> None:
+    """Check which recipes can be made and print results."""
+    print("=== RECIPE CHECKER ===")
+
+    all_ingredients = set()
+    pantry_set = pantry.get_items()
+
+    for recipe in recipes:
+        for ingredient in recipe.ingredients:
+            all_ingredients.add(ingredient)
+
+        if recipe.can_make(pantry_set):
+            print(f"{recipe.name:<14}: CAN MAKE ✓")
+        else:
+            missing = recipe.missing_ingredients(pantry_set)
+            print(f"{recipe.name:<14}: MISSING — {missing}")
+
+    unique = list(all_ingredients)
+    unique.sort()
+    print(f"\nAll unique ingredients ({len(unique)}): {unique}")
+
